@@ -2,6 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import CallRoom from "./CallRoom";
 
+const API_BASE_URL = "https://visionassist-backend-zck7.onrender.com";
+
 function AgentPage() {
   const [session, setSession] = useState(
     JSON.parse(localStorage.getItem("session"))
@@ -10,7 +12,7 @@ function AgentPage() {
   const [history, setHistory] = useState(null);
 
   const createSession = async () => {
-    const res = await axios.post("http://localhost:5000/api/sessions/create");
+    const res = await axios.post(`${API_BASE_URL}/api/sessions/create`);
     setSession(res.data);
     localStorage.setItem("session", JSON.stringify(res.data));
     setHistory(null);
@@ -18,7 +20,7 @@ function AgentPage() {
 
   const joinAsAgent = async () => {
     try {
-      const res = await axios.post("http://localhost:5000/api/livekit/token", {
+      const res = await axios.post(`${API_BASE_URL}/api/livekit/token`, {
         sessionId: session.sessionId,
         name: "Agent",
         role: "agent",
@@ -31,7 +33,7 @@ function AgentPage() {
 
   const endSession = async () => {
     const res = await axios.post(
-      `http://localhost:5000/api/sessions/${session.sessionId}/end`
+      `${API_BASE_URL}/api/sessions/${session.sessionId}/end`
     );
     alert("Session ended successfully");
     setHistory(res.data.session);
@@ -39,7 +41,7 @@ function AgentPage() {
 
   const viewHistory = async () => {
     const res = await axios.get(
-      `http://localhost:5000/api/sessions/${session.sessionId}/history`
+      `${API_BASE_URL}/api/sessions/${session.sessionId}/history`
     );
     setHistory(res.data);
   };

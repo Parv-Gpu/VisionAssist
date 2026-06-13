@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import CallRoom from "./CallRoom";
-
+const API_BASE_URL = "https://visionassist-backend-zck7.onrender.com";
 function CustomerPage() {
   const { sessionId } = useParams();
   const [searchParams] = useSearchParams();
@@ -17,7 +17,7 @@ function CustomerPage() {
     try {
       setError("");
 
-      const res = await axios.post("http://localhost:5000/api/livekit/token", {
+      const res = await axios.post(`${API_BASE_URL}/api/livekit/token`, {
         sessionId,
         name,
         role: "customer",

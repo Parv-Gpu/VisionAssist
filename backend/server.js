@@ -56,6 +56,26 @@ app.post("/api/livekit/token", async (req, res) => {
       return res.status(403).json({ error: "Invalid invite token" });
     }
 
+    const agentAlreadyJoined = session.participants.some(
+      (p) => p.role === "agent"
+    );
+
+    const customerAlreadyJoined = session.participants.some(
+      (p) => p.role === "customer"
+    );
+
+    if (role === "agent" && agentAlreadyJoined) {
+      return res.status(403).json({
+        error: "Agent already joined this session",
+      });
+    }
+
+    if (role === "customer" && customerAlreadyJoined) {
+      return res.status(403).json({
+        error: "Customer already joined this session",
+      });
+    }
+
     const at = new AccessToken(
       process.env.LIVEKIT_API_KEY,
       process.env.LIVEKIT_API_SECRET,

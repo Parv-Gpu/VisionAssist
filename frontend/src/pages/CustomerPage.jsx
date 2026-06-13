@@ -11,16 +11,23 @@ function CustomerPage() {
 
   const [name, setName] = useState("Customer");
   const [roomData, setRoomData] = useState(null);
+  const [error, setError] = useState("");
 
   const joinCall = async () => {
-    const res = await axios.post("http://localhost:5000/api/livekit/token", {
-      sessionId,
-      name,
-      role: "customer",
-      inviteToken,
-    });
+    try {
+      setError("");
 
-    setRoomData(res.data);
+      const res = await axios.post("http://localhost:5000/api/livekit/token", {
+        sessionId,
+        name,
+        role: "customer",
+        inviteToken,
+      });
+
+      setRoomData(res.data);
+    } catch (err) {
+      setError(err.response?.data?.error || "Unable to join session");
+    }
   };
 
   if (roomData) {
@@ -45,6 +52,12 @@ function CustomerPage() {
       <br />
 
       <button onClick={joinCall}>Join Video Call</button>
+
+      {error && (
+        <p style={{ color: "red", marginTop: "20px" }}>
+          {error}
+        </p>
+      )}
     </div>
   );
 }

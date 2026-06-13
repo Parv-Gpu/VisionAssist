@@ -341,11 +341,11 @@ const styles = {
     boxShadow: "0 8px 25px rgba(0,0,0,0.08)",
   },
   callBox: {
-    height: "650px",
-    borderRadius: "12px",
-    overflow: "hidden",
-    border: "2px solid #e5e7eb",
-  },
+  height: "85vh",
+  borderRadius: "12px",
+  overflow: "visible",
+  border: "2px solid #e5e7eb",
+},
 };
 
 export default AgentPage;

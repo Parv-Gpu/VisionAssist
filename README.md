@@ -8,6 +8,15 @@ It helps customer support agents resolve visual issues by allowing them to creat
 
 ---
 
+## Workflow
+
+<p align="center">
+  <img src="Vision_assist_workflow.png" alt="VisionAssist Workflow" width="100%">
+</p>
+
+---
+
+
 ## Features
 
 - Agent can create a support session

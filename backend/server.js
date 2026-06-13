@@ -4,6 +4,7 @@ const dotenv = require("dotenv");
 const { v4: uuidv4 } = require("uuid");
 const { AccessToken, RoomServiceClient } = require("livekit-server-sdk");
 
+const FRONTEND_URL = "https://vision-assist-eight.vercel.app";
 dotenv.config();
 
 const app = express();
@@ -34,7 +35,7 @@ app.post("/api/sessions/create", (req, res) => {
   res.json({
     sessionId,
     inviteToken,
-    customerLink: `http://localhost:5173/customer/${sessionId}?token=${inviteToken}`,
+    customerLink: `${FRONTEND_URL}/customer/${sessionId}?token=${inviteToken}`,
   });
 });
 

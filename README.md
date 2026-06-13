@@ -8,6 +8,22 @@ It helps customer support agents resolve visual issues by allowing them to creat
 
 ---
 
+## Live Demo
+
+### Frontend
+
+https://vision-assist-eight.vercel.app
+
+### Backend API
+
+https://visionassist-backend-zck7.onrender.com
+
+### GitHub Repository
+
+https://github.com/Parv-Gpu/VisionAssist
+
+---
+
 ## Workflow
 
 <p align="center">
@@ -15,7 +31,6 @@ It helps customer support agents resolve visual issues by allowing them to creat
 </p>
 
 ---
-
 
 ## Features
 
@@ -59,6 +74,11 @@ It helps customer support agents resolve visual issues by allowing them to creat
 - WebRTC
 - LiveKit Cloud
 
+### Deployment
+
+- Vercel
+- Render
+
 ---
 
 ## Project Structure
@@ -84,7 +104,8 @@ vision_assist/
 │   │   ├── App.css
 │   │   └── index.css
 │   ├── package.json
-│   └── vite.config.js
+│   ├── vite.config.js
+│   └── vercel.json
 │
 ├── .gitignore
 └── README.md
@@ -95,31 +116,22 @@ vision_assist/
 ## Architecture
 
 ```text
-┌────────────────────┐
-│   Agent Browser    │
-└─────────┬──────────┘
-          │
-          ▼
-┌────────────────────┐
-│   React Frontend   │
-└─────────┬──────────┘
-          │ REST APIs
-          ▼
-┌────────────────────┐
-│  Node.js Backend   │
-│  Session Manager   │
-└─────────┬──────────┘
-          │ Token Generation
-          ▼
-┌────────────────────┐
-│   LiveKit Cloud    │
-│ WebRTC Media Layer │
-└─────────┬──────────┘
-          ▲
-          │
-┌─────────┴──────────┐
-│ Customer Browser   │
-└────────────────────┘
+Agent Browser
+      |
+      v
+React Frontend
+      |
+      | REST APIs
+      v
+Node.js Backend
+(Session Manager + Token Generator)
+      |
+      v
+LiveKit Cloud
+(WebRTC Media Layer)
+      ^
+      |
+Customer Browser
 ```
 
 ---
@@ -129,11 +141,9 @@ vision_assist/
 ### 1. Clone Repository
 
 ```bash
-git clone <repository-url>
-cd vision_assist
+git clone https://github.com/Parv-Gpu/VisionAssist.git
+cd VisionAssist
 ```
-
----
 
 ### 2. Backend Setup
 
@@ -142,7 +152,7 @@ cd backend
 npm install
 ```
 
-Create a `.env` file inside `backend/`:
+Create `.env` inside `backend/`:
 
 ```env
 PORT=5000
@@ -151,23 +161,13 @@ LIVEKIT_API_KEY=your_api_key
 LIVEKIT_API_SECRET=your_api_secret
 ```
 
-Start backend:
+Run backend:
 
 ```bash
 npm run dev
 ```
 
-Backend runs on:
-
-```text
-http://localhost:5000
-```
-
----
-
 ### 3. Frontend Setup
-
-Open another terminal:
 
 ```bash
 cd frontend
@@ -175,28 +175,22 @@ npm install
 npm run dev
 ```
 
-Frontend runs on:
-
-```text
-http://localhost:5173
-```
-
 ---
 
 ## Demo Flow
 
-1. Open Agent Dashboard.
+1. Open the Agent Dashboard.
 2. Click **Create Support Session**.
 3. Copy/open the generated customer invite link.
-4. Customer enters name and joins call.
+4. Customer enters name and joins the call.
 5. Agent clicks **Join as Agent**.
 6. Both participants join the same video room.
 7. Test video and audio communication.
-8. Send messages using real-time chat.
+8. Exchange messages using real-time chat.
 9. Test screen sharing.
 10. Agent clicks **End Session**.
-11. Both users are disconnected.
-12. Agent clicks **View History** to see session details.
+11. Both users disconnect.
+12. Agent views session history.
 
 ---
 
@@ -238,7 +232,7 @@ GET /api/sessions/:id/history
 
 ---
 
-## Key Functional Requirements Covered
+## Functional Requirements Coverage
 
 | Requirement | Status |
 |---|---|
@@ -246,40 +240,39 @@ GET /api/sessions/:id/history
 | Customer joins through invite link | Completed |
 | Browser-based video call | Completed |
 | Audio calling | Completed |
-| Server-routed media | Completed using LiveKit |
-| Mute / unmute | Completed |
-| Camera on / off | Completed |
+| Server-routed media | Completed |
+| Mute / Unmute | Completed |
+| Camera On / Off | Completed |
 | Real-time chat | Completed |
+| Screen sharing | Completed |
 | Role-based access | Completed |
 | End session | Completed |
 | Session history | Completed |
-| Screen sharing | Completed |
 
 ---
 
 ## Known Limitations
 
-- Session data is stored in backend memory for hackathon demo.
+- Session data is stored in backend memory.
 - Data resets when backend server restarts.
-- Recording is not implemented in the current version.
-- File sharing is not implemented in the current version.
-- Current version supports one agent and one customer per session.
-- For hackathon speed, LiveKit Cloud is used as the media infrastructure. In production, the same architecture can be deployed with a self-hosted LiveKit server.
+- Recording is not implemented.
+- File sharing is not implemented.
+- Current version supports one agent and one customer.
+- Free-tier backend may take a few seconds to wake up after inactivity.
 
 ---
 
 ## Future Improvements
 
-- Persistent database storage using MongoDB/Firebase/PostgreSQL
+- Persistent database storage
 - Call recording
-- File sharing inside chat
+- File sharing
 - Admin dashboard
-- Reconnect handling
-- Observability metrics
-- Session reports
-- AI-powered call summary
-- Self-hosted LiveKit deployment
+- Analytics and observability
+- AI-powered call summaries
 - Multi-agent support
+- Session reports
+- Self-hosted LiveKit deployment
 
 ---
 
@@ -290,9 +283,7 @@ GET /api/sessions/:id/history
 B.Tech Electrical Engineering  
 Sardar Vallabhbhai National Institute of Technology (SVNIT), Surat
 
-### Connect With Me
-
-- GitHub: https://github.com/Parv-Gpu
+GitHub: https://github.com/Parv-Gpu
 
 ---
 
@@ -301,9 +292,6 @@ Sardar Vallabhbhai National Institute of Technology (SVNIT), Surat
 **Event:** AtomQuest Hackathon 2026  
 **Problem Statement:** Real-Time Video Support Platform  
 **Built By:** Parv Gupta  
+**Live Demo:** https://vision-assist-eight.vercel.app  
+**Backend API:** https://visionassist-backend-zck7.onrender.com  
 **GitHub Repository:** https://github.com/Parv-Gpu/VisionAssist
-
-
----
-
-

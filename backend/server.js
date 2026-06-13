@@ -87,11 +87,12 @@ app.post("/api/livekit/token", async (req, res) => {
     );
 
     at.addGrant({
-      roomJoin: true,
-      room: sessionId,
-      canPublish: true,
-      canSubscribe: true,
-    });
+  roomJoin: true,
+  room: sessionId,
+  canPublish: true,
+  canSubscribe: true,
+  canPublishData: true,
+  });
 
     const token = await at.toJwt();
 
